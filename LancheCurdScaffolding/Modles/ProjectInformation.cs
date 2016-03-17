@@ -13,25 +13,30 @@ namespace LancheCurdScaffolding.Modles
     /// <summary>
     /// 当前项目信息
     /// </summary>
-    internal class ProjectInformation
+    public class ProjectInformation
     {
-        private readonly CodeGenerationContext _context;
-        private List<ModelType> _dbContextTypeCollection;
-       // private List<ModelType> _modelTypeCollection;
-        private ICodeTypeService _codeTypeService;
-        private Project _project;
+        public CodeGenerationContext Context { get; set; }
+        public List<ModelType> DbContextTypeCollection { get; set; }
+        public ICodeTypeService CodeTypeService { get; set; }
+
+        public Project Project { get; set; }
         public ProjectInformation(CodeGenerationContext context)
         {
-            this._context = context;
-            this._codeTypeService = CommonHelper.GetService<ICodeTypeService>(context);
-            this._project = context.ActiveProject;
+            this.Context = context;
+            this.CodeTypeService = CommonHelper.GetService<ICodeTypeService>(context);
+            this.Project = context.ActiveProject;
             /// dbcontexts
-            var modelTypes = _codeTypeService.GetAllCodeTypes(_project)
-                                             .Where(m => m.FullName == "Lanche.Entityframework.UnitOfWork.DbContextBase" || m.FullName == "Lanche.MongoDB.DbContext.MongoDbContext")
+            var dbContextTypes = CodeTypeService.GetAllCodeTypes(Project)
+                                             .Where(m => m.IsDerivedType( "Lanche.Entityframework.UnitOfWork.DbContextBase") ||  m.IsDerivedType( "Lanche.MongoDB.DbContext.MongoDbContext"))
                                              .Select(m => new ModelType(m));
 
-            _dbContextTypeCollection = new List<ModelType>();
-            _dbContextTypeCollection.AddRange(modelTypes);        
+            DbContextTypeCollection = new List<ModelType>();
+            DbContextTypeCollection.AddRange(dbContextTypes);
+            
+           
+
+          
+
         }
     }
 }
