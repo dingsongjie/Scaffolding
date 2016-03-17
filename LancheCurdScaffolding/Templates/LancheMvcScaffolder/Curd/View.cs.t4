@@ -74,9 +74,11 @@
                     <table id="SearchListTable" class="table table-bordered table-hover table-responsive">
                         <thead>
 						  <tr>
+						  <th>序号</th>
 						   <#foreach( var Column in ColumnDisplayNamesWithOutId){#>
 						   <th><#=Column#></th>
 						   <#}#>
+						   <th>操作</th>
 						  </tr>
 						</thead>
                         <tbody></tbody>

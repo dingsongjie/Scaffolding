@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="LancheScaffolding..6afc7223-8573-4eb8-968c-2113ede52488" Version="1.0" Language="zh-CN" Publisher="dingsongjie" />
+    <Identity Id="LancheScaffolding..6afc7223-8573-4eb8-968c-2113ede52488" Version="1.0.0.1" Language="zh-CN" Publisher="dingsongjie" />
     <DisplayName>LancheScaffolding</DisplayName>
     <Description xml:space="preserve">为LancheProject生成Curd模板,提升前端开发效率 </Description>
     <MoreInfo>https://github.com/dingsongjie/Scaffolding</MoreInfo>
