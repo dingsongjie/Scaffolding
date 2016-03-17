@@ -34,6 +34,7 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="Microsoft.AspNet.Scaffolding.12.0, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=x86" />
+    <Reference Include="Microsoft.AspNet.Scaffolding.EntityFramework.12.0, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=x86" />
     <Reference Include="Microsoft.VisualStudio.OLE.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <HintPath>..\packages\Microsoft.VisualStudio.OLE.Interop.7.10.6070\lib\Microsoft.VisualStudio.OLE.Interop.dll</HintPath>
       <Private>True</Private>
@@ -67,6 +68,7 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
@@ -81,7 +83,12 @@
   <ItemGroup>
     <Compile Include="Factory\LancheMvcScaffolderFactory.cs" />
     <Compile Include="Helpers\CommonHelper.cs" />
+    <Compile Include="Modles\ColumnInfo.cs" />
     <Compile Include="Modles\CustomOptions.cs" />
+    <Compile Include="Modles\EntityDetail.cs" />
+    <Compile Include="Modles\EntityInfo.cs" />
+    <Compile Include="Modles\euColumnType.cs" />
+    <Compile Include="Modles\MetadataFieldViewModel.cs" />
     <Compile Include="Modles\ModelType.cs" />
     <Compile Include="Modles\MvcScaffolderCurdOutPutModel.cs" />
     <Compile Include="Modles\ProjectInformation.cs" />
@@ -101,9 +108,23 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\main.ico" />
+    <None Include="Templates\LancheMvcScaffolder\Curd\View.cs.cshtml">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>View.cs.t4</DependentUpon>
+    </None>
+    <None Include="Templates\LancheMvcScaffolder\Curd\View.cs.t4">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>View.cs.cshtml</LastGenOutput>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Templates\LancheMvcScaffolder\Curd\Controller.cs.t4">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Page Include="Ui\EntityChooseWindow.xaml">
@@ -114,6 +135,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

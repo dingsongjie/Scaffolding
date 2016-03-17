@@ -15,7 +15,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Vertical" MinWidth="496" Margin="0,28,0,106" Grid.RowSpan="2">
+        <StackPanel Orientation="Vertical" MinWidth="496" Margin="0,28,0,90" Grid.RowSpan="2">
             <Label Content="DbContext名称" 
                    Target="{Binding ElementName=dbContextTypeComboBox}" />
             <ComboBox Name="dbContextTypeComboBox" 
@@ -32,7 +32,7 @@
                       DisplayMemberPath="DisplayName"
                       TextSearch.TextPath="DisplayName"
                       SelectedItem="{Binding ModelType, UpdateSourceTrigger=LostFocus}"
-                      Text="{Binding ModelTypeName, Mode=TwoWay, UpdateSourceTrigger=LostFocus}">
+                      Text="{Binding ModelTypeName, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" SelectionChanged="entityTypeComboBox_SelectionChanged">
             </ComboBox>
             <CheckBox Content="是否生成视图" 
                       IsChecked="True" Name="IsGenerateView" RenderTransformOrigin="1.733,0.787" />
@@ -41,9 +41,9 @@
 
             <StackPanel  IsEnabled="True">
                 <CheckBox Name="IsAddJs" Content="是否引用 js库" 
-                      IsChecked="False" />
+                      IsChecked="True" />
                 <CheckBox Name="AddMasterPage" Content="使用母版页" 
-                      IsChecked="False" Click="AddMasterPage_Click" />
+                      IsChecked="True" Click="AddMasterPage_Click" />
 
                 <TextBox Name="masterPage" Text="" />
 
@@ -57,6 +57,8 @@
 
             <Label Content="页面标题"  Target="{Binding ElementName=viewTittle}" Margin="16,0,0,0" />
             <TextBox   Name="viewTittle" Margin="103,-20,-0.4,10" />
+            <Label Content="服务名前缀"   Margin="16,0,0,0" />
+            <TextBox   Name="servicePrefix" Margin="103,-20,-0.4,10" />
 
         </StackPanel>
 

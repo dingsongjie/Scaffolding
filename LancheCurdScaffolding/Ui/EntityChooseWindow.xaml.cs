@@ -1,5 +1,7 @@
 ﻿using LancheCurdScaffolding.Modles;
 using LancheCurdScaffolding.Ui.Base;
+using Microsoft.AspNet.Scaffolding.Core.Metadata;
+using Microsoft.AspNet.Scaffolding.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,11 +24,32 @@ namespace LancheCurdScaffolding.Ui
     /// </summary>
     public partial class EntityChooseWindow : VSPlatformDialogWindow
     {
-        private MvcScaffolderCurdOutPutModel _model;
-        public EntityChooseWindow(MvcScaffolderCurdOutPutModel model)
+        public bool IsCancel { get; set; }
+        private EntityDetail _model;
+        public EntityDetail EntityDetail { get { return _model; }  }
+        public EntityChooseWindow(EntityDetail model)
         {
-            InitializeComponent();
             this._model = model;
+            InitializeComponent();
+           
+        }
+
+        private void ListBox_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.list.ItemsSource = _model.Columns;
+            
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            IsCancel = false;
+            this.Close();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            IsCancel = true;
+            this.Close();
         }
     }
 }

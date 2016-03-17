@@ -8,6 +8,7 @@ namespace LancheCurdScaffolding.Modles
 {
    public  class MvcScaffolderCurdOutPutModel
     {
+       public ProjectInformation ProjectInformation { get; set; }
        public string EntityName { get; set; }
        public bool IsPaging { get; set; }
        public bool IsGenerateView { get; set; }
@@ -17,5 +18,7 @@ namespace LancheCurdScaffolding.Modles
        public string ControllerName { get; set; }
        public string ViewTitle { get; set; }
        public string RootFolder { get; set; }
+       public string DbContextName { get; set; }
+       public string ServicePrefixName { get; set; }
     }
 }

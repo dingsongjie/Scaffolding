@@ -43,7 +43,7 @@
                 </Border>
             </Grid>
 
-            <ListBox ItemsSource="{Binding Columns}" Grid.Row="1">
+            <ListBox Name="list" Height="250"  Grid.Row="1" Loaded="ListBox_Loaded">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="0">
@@ -53,7 +53,7 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition SharedSizeGroup="NameColumn1" Width="100" />
                                 <ColumnDefinition SharedSizeGroup="NameColumn2" Width="150"/>
-                                <ColumnDefinition SharedSizeGroup="NameColumn3" Width="50"/>
+                                <ColumnDefinition SharedSizeGroup="NameColumn3" Width="100"/>
                                 <ColumnDefinition SharedSizeGroup="NameColumn4" Width="150" />
                                 <ColumnDefinition SharedSizeGroup="NameColumn5" Width="60"/>
                             </Grid.ColumnDefinitions>
@@ -92,14 +92,13 @@
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom"
                     Margin="0,11,0,0">
-            <CheckBox Margin="0,5,0,0"  Content="{x:Static self:MvcScaffolderDialogResources.CheckBox_IsConfirm}"
-                      IsChecked="{Binding IsConfirm}" ></CheckBox>
-            <Button Content="{x:Static self:MvcScaffolderDialogResources.AddButton_Content}" 
+            
+            <Button Content="确认添加" 
         		    Margin="20,0,10,0"
-        		    IsDefault="true"
-        		    Command="{Binding OkCommand}" />
-            <Button Content="{x:Static self:MvcScaffolderDialogResources.CancelButton_Content}" 
-        		    Margin="0,0,0,0" IsCancel="true" />
+        		    IsDefault="true" Click="Button_Click"
+        		     />
+            <Button Content="取消" 
+        		    Margin="0,0,0,0" IsCancel="true" Click="Button_Click_1" />
         </StackPanel>
      
     </Grid>

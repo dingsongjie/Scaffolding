@@ -34,6 +34,9 @@ namespace LancheCurdScaffolding.Ui
         private void VSPlatformDialogWindow_Loaded(object sender, RoutedEventArgs e)
         {
               this.dbContextTypeComboBox.ItemsSource = _model.DbContextTypeCollection;
+              var servicePrefixNmae = System.Configuration.ConfigurationManager.AppSettings["servicePrefixName"];
+              servicePrefix.Text = servicePrefixNmae;
+
               this.masterPage.IsEnabled = false;
         }
 
@@ -44,16 +47,18 @@ namespace LancheCurdScaffolding.Ui
              var nameSpace = dbContext.DisplayName.Substring(dbContext.DisplayName.IndexOf('(') + 1, dbContext.DisplayName.Length - (dbContext.DisplayName.IndexOf('(') + 1)-1);
              var entities = _model.CodeTypeService.GetAllCodeTypes(_model.Project).Where(m => m.Namespace.FullName.Contains(nameSpace)).Select(m => new ModelType(m));;
              this.entityTypeComboBox.ItemsSource = entities;
+           
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-         
+             System.Configuration.ConfigurationManager.AppSettings["servicePrefixName"]= servicePrefix.Text;
+            
             MvcScaffolderCurdOutPutModel outModel = new MvcScaffolderCurdOutPutModel()
             {
                 AddJs = (bool)this.IsAddJs.IsChecked,
                 AddMasterPage = (bool)this.AddMasterPage.IsChecked,
-                ControllerName = this.controllerName.ToString(),
+                ControllerName = this.controllerName.Text,
                 EntityName = _model.CodeTypeService.GetAllCodeTypes(_model.Project).SingleOrDefault(m =>(m.Namespace != null && !String.IsNullOrWhiteSpace(m.Namespace.FullName)
                               ? String.Format("{0} ({1})", m.Name, m.Namespace.FullName)
                               : m.Name )== this.entityTypeComboBox.SelectedValue.ToString()).FullName,
@@ -61,10 +66,15 @@ namespace LancheCurdScaffolding.Ui
                 IsGenerateView = (bool)this.IsGenerateView.IsChecked,
                 IsPaging = (bool)this.IsPaging.IsChecked,
                 RootFolder = "",
-                ViewTitle = this.viewTittle.Text
+                ViewTitle = this.viewTittle.Text,
+                ProjectInformation = _model,
+                 DbContextName=_model.CodeTypeService.GetAllCodeTypes(_model.Project).SingleOrDefault(m =>(m.Namespace != null && !String.IsNullOrWhiteSpace(m.Namespace.FullName)
+                              ? String.Format("{0} ({1})", m.Name, m.Namespace.FullName)
+                              : m.Name )== this.dbContextTypeComboBox.SelectedValue.ToString()).FullName,
+                ServicePrefixName = servicePrefix.Text
 
             };
-           
+            OutPutModel = outModel;
             this.Close();
         }
 
@@ -80,6 +90,12 @@ namespace LancheCurdScaffolding.Ui
             {
                 this.masterPage.IsEnabled = false;
             }
+        }
+
+        private void entityTypeComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            this.controllerName.Text = entityTypeComboBox.SelectedValue.ToString().Split(' ')[0] + "Controller";
+            this.viewTittle.Text = entityTypeComboBox.SelectedValue.ToString().Split(' ')[0];
         } 
     }
 }
